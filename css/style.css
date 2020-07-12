@@ -165,3 +165,22 @@ body {
   left: -2px;
   transform: rotate(134deg);
 }
+
+#chart-container {
+  font-size: 0.8rem;
+}
+
+.stop-left {
+    stop-color: #3cd3ad;  /* Indigo */
+}
+
+.stop-right {
+    stop-color: #4cb8c4;  /* Teal */
+}
+
+.stop-left-active {
+    stop-color: #f7bb97;  /* Indigo */
+}
+.stop-right-active {
+    stop-color: #dd5e89;  /* Teal */
+}

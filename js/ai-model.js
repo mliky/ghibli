@@ -10,12 +10,6 @@ async function init() {
 
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
-
-    // append elements to the DOM
-    labelContainer = document.getElementById("label-container");
-    for (let i = 0; i < maxPredictions; i++) { // and class labels
-        labelContainer.appendChild(document.createElement("div"));
-    }
 }
 
 async function predict() {
@@ -30,11 +24,18 @@ async function predict() {
     $('#out-card .card-text').text("- " + character_data[character].movie);
     
     /* card 2 결과 셋팅 */
+    var result_data = [];
     for (let i = 0; i < 5; i++) {
-        var result_value = prediction[i].probability;
-        const classPrediction = prediction[i].className + ": " + result_value.toFixed(2);
-        labelContainer.childNodes[i].innerHTML = classPrediction;
+        var obj = {
+            name: prediction[i].className,
+            value: prediction[i].probability * 100
+        };
+        
+        result_data.push(obj);
+        //const classPrediction = prediction[i].className + ": " + result_value.toFixed(2);
+       // labelContainer.childNodes[i].innerHTML = classPrediction;
     }
+    setChart(result_data);
     
     $('.gender').hide();
     $('#upload-board-msg').hide();
