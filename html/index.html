@@ -18,58 +18,87 @@
         <!-- AddThis -->
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f0ae4c5b1783864"></script>
         
-        <title>지브리 테스트 :: Ghibli Face Test</title>
+        <title>지브리 닮은꼴 테스트 :: Ghibli Face Test</title>
 	</head>
 	<body>
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Result</a>
-            </li>
-        </ul>
-        <h2>인공지능 지브리 테스트</h2>
-        <h3>당신은 지브리 주인공들 중 누구와 닮았을까요?</h3>
-        <button type="button" onclick="predict()">결과</button>
-        <div class="file-upload">
-            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
-            <div class="image-upload-wrap">
-                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                <div class="drag-text">
-                    <h3>Drag and drop a file or select add Image</h3>
+        <div class="container">
+            <!-- Title -->
+            <blockquote class="blockquote text-center mt-5">
+                <h3 class="mb-0">지브리 닮은꼴 테스트</h3>
+                <footer class="blockquote-footer">지브리 주인공들 중 당신의 닮은꼴은?</footer>
+            </blockquote>
+
+            <!-- Select Gender -->
+            <blockquote class="gender blockquote text-center m-4">
+                <input type="checkbox" id="gender">
+                <label for="gender">
+                    <span class="knob"><i></i></span>
+                </label>
+            </blockquote>
+
+            <!-- Upload Picture -->
+            <div id="upload-board" class="row justify-content-md-center m-3">
+                <div class="file-upload">
+                    <div class="image-upload-wrap">
+                        <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                        <div class="drag-text">
+                            <h3>사진을 올려주세요</h3>
+                        </div>
+                    </div>
+                    <div class="file-upload-content">
+                        <div class="card">
+                            <img id="face-image" class="file-upload-image card-img" src="#" alt="your image" multiple="false"/>
+                            <div class="card-img-overlay">
+                                <div id="loading" class="spinner-border text-light" role="status"></div>
+                                <p id="loading-text" class="card-text">
+                                    <small>사진을 분석하고 있습니다.</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="file-upload-content">
-                <img id="face-image" class="file-upload-image" src="#" alt="your image" />
-                <div class="image-title-wrap">
-                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+            <!-- Notify -->
+            <blockquote id="upload-board-msg" class="blockquote text-center mt-2" >
+                <small>
+                    <small style="color:#bababa;">※ 모든 사진은 저장되지 않으며, 분석에만 사용됩니다.</small>
+                </small>
+            </blockquote>
+            <!-- Card Group -->
+            <div id="result-board" class="row justify-content-md-center m-3 p-2" style="display:none">
+                <div class="col-lg-7">
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="card-img-div">
+                                <img id="out-img" src="../src/img/character/Therru.jpg" class="card-img-top" alt="Result" />
+                            </div>
+                            
+                            <div id="out-card" class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text"></p>
+                                
+                            </div>
+                            <footer class="p-3">
+                                <div class="addthis_inline_share_toolbox"></div>
+                            </footer>
+                        </div>
+                        <div class="card">
+                            <div class="card-img-div">
+                                <img id="in-img" src="../src/img/character/Arren.jpg" class="card-img-top" alt="Picture" />
+                            </div>
+                            <div id="in-card" class="card-body">
+                                <h5 class="card-title">결과 <small> Result</small></h5>
+                                <p class="card-text" id="label-container"></p>
+                            </div>
+                            <footer class="p-3 text-right">
+                                <a href="#" class="btn btn-primary" onclick="location.reload(true);">다시하기</a>
+                            </footer>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
-        
-        <!-- Card Group -->
-        <div class="card-group">
-            <div class="card">
-                <img src="../src/img/character/Arren.jpg" class="card-img-top" alt="Picture" />
-                <div class="card-body">
-                    <h5 class="card-title">Picture</h5>
-                    <p class="card-text" id="label-container"></p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../src/img/character/Therru.jpg" class="card-img-top" alt="Result" />
-                <div class="card-body">
-                    <h5 class="card-title">결과</h5>
-                    <p class="card-text">
-                        This card has supporting text below as a natural lead-in to additional content.
-                    </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="addthis_inline_share_toolbox"></div>
 	</body>
     <footer>
         <!-- Teachable Machine JavaScript -->
@@ -83,14 +112,21 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         
         <!-- JavaScript -->
+        <script src="../js/character-data.js"></script>
         <script src="../js/ai-model.js"></script>
         <script src="../js/file-upload.js"></script>
         <script src="../js/index.js"></script>
         
-        <!-- Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
+        <!-- Image Upload :: Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
         Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
         The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          -->
+        
+        <!-- Gender toggle button :: Copyright (c) 2020 by Mert Cukuren (https://codepen.io/knyttneve/pen/bPpEZY)
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        -->
     </footer>
 </html>

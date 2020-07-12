@@ -1,3 +1,4 @@
+var character_data = 
 {
     "Arren": {"name":"아렌 (Arren)", "movie" : "게드전기 (Tales from Earthsea)"},
     "Ashitaka": {"name":"아시타카 (Ashitaka)", "movie" : "모노노케 히메 (Princess Mononoke)"},
@@ -28,4 +29,4 @@
     "Sophie": {"name":"소피 (Sophie)", "movie" : "하울의 움직이는 성 (Howl's Moving Castle)"},
     "Therru": {"name":"테루 (Therru)", "movie" : "게드전기 (Tales from Earthsea)"},
     "Umi": {"name":"마츠자키 우미 (Umi Matsuzaki)", "movie" : "코쿠리코 언덕에서 (From Up on Poppy Hill)"},
-}
+};

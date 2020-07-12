@@ -1,11 +1,12 @@
-const mURL = "https://teachablemachine.withgoogle.com/models/-52-tS2fq/";
-const uURL = "https://teachablemachine.withgoogle.com/models/MPQeLFOwI/";
+const maleURL = "https://teachablemachine.withgoogle.com/models/-52-tS2fq/";
+const femaleURL = "https://teachablemachine.withgoogle.com/models/MPQeLFOwI/";
 
 let model, webcam, labelContainer, maxPredictions;
 
 async function init() {
-    const modelURL = uURL + "model.json";
-    const metadataURL = uURL + "metadata.json";
+    var URL = $('#gender').is(':checked') ? maleURL : femaleURL;
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
 
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
@@ -18,12 +19,25 @@ async function init() {
 }
 
 async function predict() {
-    var image = document.getElementById("face-image")
-    // predict can take in an image, video or canvas html element
+    var image = document.getElementById("face-image");
     const prediction = await model.predict(image, false);
-    for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction =
-            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+    prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+    var character = prediction[0].className;
+    
+    /* card 1 최종 결과 셋팅 */
+    $('#out-img').attr('src', "../src/img/character/" + character + ".jpg");
+    $('#out-card .card-title').text(character_data[character].name);
+    $('#out-card .card-text').text("- " + character_data[character].movie);
+    
+    /* card 2 결과 셋팅 */
+    for (let i = 0; i < 5; i++) {
+        var result_value = prediction[i].probability;
+        const classPrediction = prediction[i].className + ": " + result_value.toFixed(2);
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
+    
+    $('.gender').hide();
+    $('#upload-board-msg').hide();
+    $('#upload-board').hide();
+    $('#result-board').show();
 }

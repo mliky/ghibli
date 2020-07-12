@@ -1,22 +1,31 @@
 function readURL(input) {
-  if (input.files && input.files[0]) {
+    if (input.files && input.files[0]) {
 
     var reader = new FileReader();
 
     reader.onload = function(e) {
-      $('.image-upload-wrap').hide();
+        $('.image-upload-wrap').hide();
+        $('#loading').show();
+        $('.file-upload-image').attr('src', e.target.result);
+        $('#in-img').attr('src', e.target.result);
+        $('.file-upload-content').show();
+        $('#loading-text').show();
 
-      $('.file-upload-image').attr('src', e.target.result);
-      $('.file-upload-content').show();
-
-      $('.image-title').html(input.files[0].name);
+        $('.image-title').html(input.files[0].name);
     };
 
     reader.readAsDataURL(input.files[0]);
 
-  } else {
-    removeUpload();
-  }
+    init().then(function() {
+        predict();
+        $('#loading').hide();
+        $('#loading-text').hide();
+        
+    });
+
+    } else {
+        removeUpload();
+    }
 }
 
 function removeUpload() {
