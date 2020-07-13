@@ -1,14 +1,24 @@
 # made by UYoung Sim
+# https://ghiblitest.netlify.app/html/
 
-1. 구름 ide 사용 (AWS와 같은 클라우드 기반 서비스)
-2. 파이썬 Beautiful Soup를 이용하여 구글 이미지 크롤링 (이미지 다운로드 라이브러리는 점검중이므로 사용불가)
-3. 구글 Teachable Machine을 이용하여 이미지 학습 시키기
- - (캐릭터당 10~20개의 사진 사용)
-4. Github 연동
-5. Netlify로 배포
-6. 공유하기
-8. d3로 결과보기
-11. Bootstrap반응형 웹
+# 1. 개발환경     : “구름 IDE“ 클라우드 통합개발환경
+#                  https://ide.goorm.io/
+# 2. 모델         : “Teachable Machine” 구글 머신러닝 모델 생성 사이트
+#                  이미지 모델을 사용
+#                  https://teachablemachine.withgoogle.com/
+# 3. 학습용 데이터 : 웹 크롤링 파이썬 모듈인 “Beautiful Soup”를 사용하여 구글 이미지를 크롤링
+#                  캐릭터 당 15~20개의 이미지를 학습
+# 4. 형상관리      : Github
+#                   https://github.com/mliky/ghibli
+# 5. 시각화       : 데이터 시각화 자바스크립트 라이브러리인 “d3.js”를 사용하여 분석 결과를 순위별 차트로 표현
+#                  https://d3js.org/
+# 6. 호스팅       : Netlify (무료)
+#                  https://app.netlify.com/
+# 7. SNS 공유     : AddThis
+#                  https://www.addthis.com/ 열기
+# 8. 디자인       : Bootstrap (반응형 웹)
+#                  getbootstrap.com
 
-7. 광고
-10. 다국어 처리
+# 앞으로 추가할 기능들
+# - 광고 추가 (카카오애드핏)
+# - 다국어 지원
