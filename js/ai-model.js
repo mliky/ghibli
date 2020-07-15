@@ -19,7 +19,7 @@ async function predict() {
     var character = prediction[0].className;
     
     /* card 1 최종 결과 셋팅 */
-    $('#out-img').attr('src', "../src/img/character/" + character + ".jpg");
+    $('#out-img').attr('src', "./src/img/character/" + character + ".jpg");
     $('#out-card .card-title').text(character_data[character].name);
     $('#out-card .card-text').text("- " + character_data[character].movie);
     
